@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserInt } from '../../Models/user-int';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+
+  user!:UserInt
+
+
+
+constructor(private authSvc:AuthService){}
+
+
+ngOnInit(){
+  this.authSvc.user$.subscribe(user => {
+    if(user) this.user= user
+  })
+}
+
 
 }

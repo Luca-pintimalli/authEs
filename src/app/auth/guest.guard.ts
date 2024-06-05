@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot,  GuardResult, MaybeAsync, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuestGuard implements CanActivate, CanActivateChild {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    return true;
+export class GuestGuard {
+  constructor(private authSvc:AuthService ){
+
   }
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): MaybeAsync<GuardResult> {
-    return true;
-  }
+  
+    canActivate(
+      route: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+      return !this.authSvc.syncIsLoggedIn
+    }
+    canActivateChild(
+      childRoute: ActivatedRouteSnapshot,
+      state: RouterStateSnapshot): MaybeAsync<GuardResult> {
+      return this.canActivate(childRoute,state);
+    }
   
 }

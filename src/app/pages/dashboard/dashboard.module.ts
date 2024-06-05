@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { UserInt } from '../../Models/user-int';
+import { AuthService } from '../../auth/auth.service';
 
 
 @NgModule({
@@ -14,4 +16,8 @@ import { DashboardComponent } from './dashboard.component';
     DashboardRoutingModule
   ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+
+  
+
+ }
